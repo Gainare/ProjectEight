@@ -7,12 +7,15 @@ const more   = document.getElementById('more');
 const apiURL = 'https://api.lyrics.ovh'
 
 async function searchSongs(term) {
- const res  = await fetch(`${apiURL}/suggest${term}`)
- const data = await res.json()
- 
- showData(data)
+const res  = await fetch(`${apiURL}/suggest${term}`)
+const data = await res.json()
+
+showData(data)
 }
 
+async function getLyrics(artist, songTitle){
+
+}
 function showData(data) {
     result.innerHTML = `
     <ul class="songs">
@@ -39,3 +42,16 @@ function showData(data) {
         more.innerHTML = ''
     }
 }
+
+// Event listener
+form.addEventListener('submit', e => {
+    e.preventDefault()
+
+    const searchTerm = search.nodeValue.trim()
+
+    if (!searchTerm) {
+        alert('Please type in a search term')
+    } else {
+        searchSongs(searchTerm)
+    }
+})
